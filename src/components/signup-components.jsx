@@ -79,7 +79,7 @@ export const RightComponent = () => {
 
         try {
           const endpoint = isSignup ? '/user/signup' : '/user/signin';
-          const response = await axios.post(`https://envisionmri.onrender.com${endpoint}`, formData);
+          const response = await axios.post(`http://localhost:3000${endpoint}`, formData);
           console.log(isSignup ? 'Signup successful:' : 'Signin successful:', response.data);
           
           if (response.data.token) {

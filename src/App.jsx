@@ -7,6 +7,9 @@ import HomePage from "./pages/home";
 import Footer from "./components/footer";
 import Profile from "./pages/profile";
 import ReportAnalyzer from "./pages/report-analyzer";
+import ErrorPage from "./pages/Error";
+import ManagePatient from "./pages/managepatient";
+import ChatBot from "./components/chatbot";
 
 
 function App() {
@@ -20,7 +23,10 @@ function App() {
           <Route path="/signup" element={<Signup />} />
           <Route path="/signin" element={<Signin />} />
           <Route path="/profile" element={<Profile />} />
-          <Route path="report-analyzer" element={<ReportAnalyzer />} />
+          <Route path="/report-analyzer" element={<ReportAnalyzer />} />
+          <Route path="*" element={<ErrorPage/>} />
+          <Route path="/manage-patient" element={<ManagePatient/>} />
+          <Route path="/chat" element={<ChatBot/>}/>
         </Routes>
         <Footer />
     

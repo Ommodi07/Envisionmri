@@ -17,7 +17,7 @@ const Profile = () => {
             }
 
             try {
-                const response = await axios.get('https://envisionmri.onrender.com/user/profile', {
+                const response = await axios.get('http://localhost:3000/user/profile', {
                     headers: {
                         Authorization: `Bearer ${token}`
                     }

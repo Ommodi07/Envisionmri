@@ -72,7 +72,7 @@ export const RightComponent = () => {
         setIsLoading(true);
 
         try {
-            const response = await axios.post('https://envisionmri.onrender.com/user/signup', formData);
+            const response = await axios.post('http://localhost:3000/user/signup', formData);
             console.log('Signup successful:', response.data);
          
             navigate("/signin")
