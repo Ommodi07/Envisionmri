@@ -25,7 +25,7 @@ export default function ChatBot({ isOpen, toggleChat }) {
     setBotResponse("..."); 
   
     try {
-      const response = await axios.post("http://localhost:3000/chat/", {
+      const response = await axios.post("https://envisionmri.onrender.com/chat/", {
         query: userMessage
       }, {
         headers: {
