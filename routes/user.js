@@ -1,6 +1,6 @@
 const {Router} = require("express");
 const  userRouter = Router();
-const {userModel,courseModel,adminModel, purchaseModel} = require("../db");
+const {userModel, patientModel} = require("../db");
 const {requiredBody} = require("../inputValidation/inputSchema");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
@@ -32,6 +32,7 @@ userRouter.post("/signup",async(req,res)=>{
                 const password = req.body.password;
                 const firstname = req.body.firstname;
                 const lastname = req.body.lastname;
+                const registerNumber = req.body.registerNumber;
                 console.log(email)
                 try
                 {
@@ -48,7 +49,8 @@ userRouter.post("/signup",async(req,res)=>{
                         email:email,
                         password:hashPassword,
                         firstname:firstname,
-                        lastname:lastname
+                        lastname:lastname,
+                        registerNumber,
 
                 }) ;
                 res.json({message:"Sign-up successfully."})
@@ -72,7 +74,7 @@ userRouter.post("/signin",async(req,res)=>{
         {
                 res.json({message:"User doesn't exsist"});
         }
-
+        console.log(password)
         const isValid = await bcrypt.compare(password,user.password);
 
         if(email!==user.email||!isValid)
@@ -80,12 +82,14 @@ userRouter.post("/signin",async(req,res)=>{
 
         const token = jwt.sign({id:user._id},JWT_USER_PASSWORD,{expiresIn:'24h'});
 
-        res.json({message:"Sign-in successfully",
-                token
+        res.status(200).json({message:"Sign-in successfully",
+                token   
         })
         
        } catch (error) {
-                res.json({message:"Internal Server Error"});
+        console.log(error)        
+        res.status(500).json({message:"Internal Server Error"}); 
+
        }
 })
 
@@ -97,6 +101,7 @@ userRouter.get("/profile", userMiddleware, async (req, res) => {
             if (!user) {
                 return res.status(404).json({ message: "User not found" });
             }
+            
     
             res.json(user);
         } catch (error) {
@@ -104,7 +109,36 @@ userRouter.get("/profile", userMiddleware, async (req, res) => {
             res.status(500).json({ message: "Internal server error" });
         }
     });
-module.exports = {
+
+
+    userRouter.get('/patients',userMiddleware,async(req,res)=>{
+        try{
+                const userId = req.userId;
+                if(!userId)
+                {
+                        res.status(401).json({
+                                message: 'Not authorised'
+                        })
+                }
+
+                const patients = await patientModel.find({userId});
+
+                if(!patients)
+                {
+                        res.status(404).json({message:'No patient found'})
+                }
+
+                res.status(200).json({
+                        patients
+                })
+                
+        }
+        catch(err)
+        {
+                res.status(500).json({message:'Internal Server Error'});
+        }
+    })
+    module.exports = {
         userRouter
 }
 

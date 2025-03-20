@@ -14,15 +14,17 @@ const passwordSchema  = zod.string()
   message: 'Password must contain at least one special character (!@#$%^&*)',
 });
 
+const registerNumberData = ['IN34334987','IN89371647','IN78939123','IN78348902']
+
 const firstnameSchema = zod.string();
 const lastnameSchema = zod.string();
-
 
 const requiredBody = zod.object({
     firstname:firstnameSchema,
     lastname: lastnameSchema,
     email: emailSchema,
     password: passwordSchema,
+    registerNumber : zod.enum(registerNumberData,{message:"Incorrect Registration Number"})
 });
 
 

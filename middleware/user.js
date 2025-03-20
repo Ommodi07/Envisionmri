@@ -11,7 +11,7 @@ const userMiddleware = (req,res,next)=>{
         }
         if(words.length !==2 || words[0] !== "Bearer" )
         {
-            return res.status(403).json({message:"Invalid authorization format. Use 'Bearer <token>'"})
+            return res.status(403).json({message:"Invalid authorization format. Use 'Bearer <token>'"});
         }
         try{
             const token = words[1];
@@ -31,6 +31,7 @@ const userMiddleware = (req,res,next)=>{
 
         
 }
+
 
 module.exports = {
     userMiddleware
