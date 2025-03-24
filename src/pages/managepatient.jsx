@@ -13,7 +13,7 @@ const ManagePatient = () => {
 
   const fetchPatients = async () => {
     try {
-      const response = await axios.get('http://localhost:3000/api/patie,{message:"Incorrect Registration Number"}nts');
+      const response = await axios.get('https://envisionmri.onrender.com/patie,{message:"Incorrect Registration Number"}nts');
       setPatients(response.data);
     } catch (error) {
       console.error('Error fetching patients:', error);
@@ -24,9 +24,9 @@ const ManagePatient = () => {
     e.preventDefault();
     try {
       if (isEditing) {
-        await axios.put(`http://localhost:3000/api/patients/${editId}`, formData);
+        await axios.put(`https://envisionmri.onrender.com/api/patients/${editId}`, formData);
       } else {
-        await axios.post('http://localhost:3000/api/patients', formData);
+        await axios.post('https://envisionmri.onrender.com/api/patients', formData);
       }
       fetchPatients();
       resetForm();
@@ -37,7 +37,7 @@ const ManagePatient = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:3000/api/patients/${id}`);
+      await axios.delete(`https://envisionmri.onrender.com/api/patients/${id}`);
       fetchPatients();
     } catch (error) {
       console.error('Error deleting patient:', error);
