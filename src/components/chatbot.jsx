@@ -28,9 +28,9 @@ export default function ChatBot({ isOpen, toggleChat }) {
       const response = await fetch("/query",{
         method:"POST",
         body: JSON.stringify({
-          query:userInput
+          "query":userInput
         }),
-         headers: {
+        headers: {
         "Content-type": "application/json"
     }
 
