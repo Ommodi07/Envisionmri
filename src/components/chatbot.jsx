@@ -46,10 +46,10 @@ export default function ChatBot({ isOpen, toggleChat }) {
       
     } catch (error) {
       console.error("Error fetching response:", error);
-      setBotResponse("Sorry, I'm having trouble connecting. Please try again later.");
+      setBotResponse("Ahhhh shit..... currently i myself need the treatment of a doctor.");
       setChatHistory(prev => [...prev, { 
         type: 'bot', 
-        message: "Sorry, I'm having trouble connecting. Please try again later." 
+        message: "Ahhhh shit..... currently i myself need the treatment of a doctor." 
       }]);
     } finally {
       setIsLoading(false);
